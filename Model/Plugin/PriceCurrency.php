@@ -40,7 +40,7 @@ class PriceCurrency extends PriceFormatPluginAbstract
         ...$args
     ) {
         if (strpos(',00', (string)$price) || strpos(',95', (string)$price)) {
-            return $proceed($price);
+            return $price;
         }
 
         if ($this->getConfig()->isEnable()) {
