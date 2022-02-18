@@ -39,9 +39,9 @@ class PriceCurrency extends PriceFormatPluginAbstract
         $price,
         ...$args
     ) {
-        // if (strpos(',00', $price) || strpos(',95', $price)) {
-        //     return 999;
-        // }
+        if (strpos(',00', (string)$price) || strpos(',95', (string)$price)) {
+            return $proceed($price);
+        }
 
         if ($this->getConfig()->isEnable()) {
 
