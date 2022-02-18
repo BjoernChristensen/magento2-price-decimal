@@ -46,8 +46,8 @@ class PriceCurrency extends PriceFormatPluginAbstract
                 return $price;
             }
 
-            // return 123;
-            return round($price, 2, PHP_ROUND_HALF_UP);
+            return 123456;
+            // return round($price, 2, PHP_ROUND_HALF_UP);
 
         } else {
             return $proceed($price);
