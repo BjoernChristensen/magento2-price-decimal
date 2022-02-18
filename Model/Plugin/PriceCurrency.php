@@ -39,7 +39,12 @@ class PriceCurrency extends PriceFormatPluginAbstract
         $price,
         ...$args
     ) {
+        if (strpos(',00', $price) || strpos(',95', $price)) {
+            return $price;
+        }
+
         if ($this->getConfig()->isEnable()) {
+
             return round($price, 2, PHP_ROUND_HALF_UP);
 
         } else {
