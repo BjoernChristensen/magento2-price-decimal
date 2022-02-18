@@ -41,7 +41,7 @@ class PriceCurrency extends PriceFormatPluginAbstract
     ) {
 
         if ($this->getConfig()->isEnable()) {
-
+            return 123.25;
             // if (strpos('.00', (string)$price) || strpos('.95', (string)$price)) {
             if (true) {
                 return $price;
