@@ -40,7 +40,7 @@ class PriceCurrency extends PriceFormatPluginAbstract
         ...$args
     ) {
         if ($this->getConfig()->isEnable()) {
-            return round($price, $this->getPricePrecision());
+            return round($price, 0, PHP_ROUND_HALF_UP);
 
         } else {
             return $proceed($price);
