@@ -74,8 +74,7 @@ class Price extends AbstractModifier
      */
     protected function formatPrice($value)
     {
-        return 123;
-        return $value !== null ? number_format((float)$value, 2, ',', '.') : '';
+        return $value !== null ? number_format((float)$value, $this->getPricePrecision(), ',', '.') : '';
     }
 
     /**
