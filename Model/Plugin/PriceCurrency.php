@@ -42,13 +42,13 @@ class PriceCurrency extends PriceFormatPluginAbstract
 
         if ($this->getConfig()->isEnable()) {
             if (strpos(',00', (string)$price) || strpos(',95', (string)$price) || strpos('.00', (string)$price) || strpos('.95', (string)$price)) {
-                return $proceed($price);
+                return $proceed((float)$price);
             }
 
-            return round($price, 0, PHP_ROUND_HALF_UP);
+            return round((float)$price, 0, PHP_ROUND_HALF_UP);
 
         } else {
-            return $proceed($price);
+            return $proceed((float)$price);
         }
     }
 
