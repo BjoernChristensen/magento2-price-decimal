@@ -39,11 +39,16 @@ class PriceCurrency extends PriceFormatPluginAbstract
         $price,
         ...$args
     ) {
-        return $price;
-
         if ($this->getConfig()->isEnable()) {
-            if (strpos(',00', (string)$price) || strpos(',95', (string)$price) || strpos('.00', (string)$price) || strpos('.95', (string)$price) || strpos('.25', (string)$price) || strpos(',25', (string)$price)) {
-                return $proceed((float)$price);
+            if (
+                strpos((string)$price, ',00') ||
+                strpos((string)$price, ',95') ||
+                strpos((string)$price, ',25') ||
+                strpos((string)$price, '.00') ||
+                strpos((string)$price, '.95') ||
+                strpos((string)$price, '.25')
+            ) {
+                return (float)$price;
             }
 
             return round((float)$price, 0, PHP_ROUND_HALF_UP);
