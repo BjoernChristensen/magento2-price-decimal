@@ -41,7 +41,6 @@ class PriceCurrency extends PriceFormatPluginAbstract
     ) {
         if ($this->getConfig()->isEnable()) {
             // Check if its a "pretty" float ( ͡° ͜ʖ ͡°)
-            var_dump($product);
             if (
                 strpos((string)$price, ',00') ||
                 strpos((string)$price, ',95') ||
