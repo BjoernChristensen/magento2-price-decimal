@@ -55,6 +55,8 @@ class Price extends AbstractModifier
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $product = $objectManager->create(\Magento\Catalog\Model\Product::class)->load($productId);
 
+        exit;
+
         if (!$product->getSpecialPrice()) {
             exit;
         }
