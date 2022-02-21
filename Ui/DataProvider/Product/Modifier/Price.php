@@ -52,11 +52,14 @@ class Price extends AbstractModifier
             return $this->resolvePersistentData($data);
         }
         $productId = $this->locator->getProduct()->getId();
-        if (isset($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'])) {
-            $productPrice =  $this->locator->getProduct()->getPrice();
-            $data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'] = $this->formatPrice($productPrice);
-            return $data;
+
+        if(isset($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'])){
+             foreach($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'] as $key => $tierPrice){
+                $data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'][$key]['price'] = number_format((float)$tierPrice['website_price'], 2, '.', '');
+             }
         }
+
+        return $data;
     }
 
     /**
