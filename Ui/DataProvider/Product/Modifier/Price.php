@@ -57,7 +57,7 @@ class Price extends AbstractModifier
         // }
 
         $productPrice =  $this->locator->getProduct()->getSpecialPrice();
-        $data[$productId][self::DATA_SOURCE_DEFAULT]['specialprice'] = $this->formatPrice($productPrice);
+        $data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'] = $this->formatPrice($productPrice);
         return $data;
     }
 
