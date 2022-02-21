@@ -53,11 +53,11 @@ class Price extends AbstractModifier
         }
         $productId = $this->locator->getProduct()->getId();
 
-        // if ($product->getPrice() > $product->getFinalPrice()) {
-        //     return $data;
-        // }
+        if (!$product->getSpecialPrice()) {
+            return $data;
+        }
 
-        $productPrice =  $this->locator->getProduct()->getFinalPrice();
+        $productPrice =  $this->locator->getProduct()->getPrice();
         $data[$productId][self::DATA_SOURCE_DEFAULT]['price'] = $this->formatPrice($productPrice);
         return $data;
     }
