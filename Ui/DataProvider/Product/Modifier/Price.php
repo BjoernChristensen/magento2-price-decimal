@@ -51,9 +51,6 @@ class Price extends AbstractModifier
         if (!$this->locator->getProduct()->getId() && $this->dataPersistor->get('catalog_product')) {
             return $this->resolvePersistentData($data);
         }
-         $productId = $this->locator->getProduct()->getId();
-        $productPrice =  $this->locator->getProduct()->getPrice();
-        $data[$productId][self::DATA_SOURCE_DEFAULT]['price'] = number_format((float)$productPrice, 2, '.', '');
 
         if(isset($data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'])){
              foreach($data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'] as $key => $tierPrice){
