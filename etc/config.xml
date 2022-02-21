@@ -11,7 +11,7 @@
         <admin>
             <catalog_price_decimal>
                 <general>
-                    <enable>2</enable>
+                    <enable>1</enable>
                 </general>
             </catalog_price_decimal>
         </admin>
