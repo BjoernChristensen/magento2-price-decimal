@@ -40,13 +40,12 @@ class PriceCurrency extends PriceFormatPluginAbstract
         ...$args
     ) {
         if ($this->getConfig()->isEnable()) {
+            // Check if its a "pretty" float ( ͡° ͜ʖ ͡°)
             if (
                 strpos((string)$price, ',00') ||
                 strpos((string)$price, ',95') ||
-                strpos((string)$price, ',25') ||
                 strpos((string)$price, '.00') ||
-                strpos((string)$price, '.95') ||
-                strpos((string)$price, '.25')
+                strpos((string)$price, '.95')
             ) {
                 return (float)$price;
             }

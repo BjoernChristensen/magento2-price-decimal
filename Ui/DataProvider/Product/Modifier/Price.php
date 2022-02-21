@@ -51,17 +51,12 @@ class Price extends AbstractModifier
         if (!$this->locator->getProduct()->getId() && $this->dataPersistor->get('catalog_product')) {
             return $this->resolvePersistentData($data);
         }
-        $productId = $this->locator->getProduct()->getId();
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $product = $objectManager->create(\Magento\Catalog\Model\Product::class)->load($productId);
 
-        exit;
+        // if (!$product->getSpecialPrice()) {
+        //     exit;
+        // }
 
-        if (!$product->getSpecialPrice()) {
-            exit;
-        }
-
-        $productPrice =  $this->locator->getProduct()->getPrice();
+        $productPrice =  $this->locator->getProduct()->getSpecialPrice();
         $data[$productId][self::DATA_SOURCE_DEFAULT]['price'] = $this->formatPrice($productPrice);
         return $data;
     }
