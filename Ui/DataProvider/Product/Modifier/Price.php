@@ -51,9 +51,21 @@ class Price extends AbstractModifier
         if (!$this->locator->getProduct()->getId() && $this->dataPersistor->get('catalog_product')) {
             return $this->resolvePersistentData($data);
         }
-        $productId = $this->locator->getProduct()->getId();
-        $productPrice =  $this->locator->getProduct()->getSpecialPrice();
-        $data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'] = $this->formatPrice($productPrice);
+         $productId = $this->locator->getProduct()->getId();
+        $productPrice =  $this->locator->getProduct()->getPrice();
+        $data[$productId][self::DATA_SOURCE_DEFAULT]['price'] = number_format((float)$productPrice, 2, '.', '');
+
+        if(isset($data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'])){
+             foreach($data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'] as $key => $tierPrice){
+                $data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'][$key]['price'] = number_format((float)$tierPrice['website_price'], 2, '.', '');
+             }
+        }
+
+        if(isset($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'])){
+             foreach($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'] as $key => $tierPrice){
+                $data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'][$key]['price'] = number_format((float)$tierPrice['website_price'], 2, '.', '');
+             }
+        }
         return $data;
     }
 
@@ -74,7 +86,7 @@ class Price extends AbstractModifier
      */
     protected function formatPrice($value)
     {
-        return $value !== null ? number_format((float)$value, 2, ',', '.') : '';
+        return $value !== null ? number_format((float)$value, $this->getPricePrecision(), ',', '.') : '';
     }
 
     /**
