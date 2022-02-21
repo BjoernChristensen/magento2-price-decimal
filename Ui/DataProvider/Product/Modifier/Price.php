@@ -54,7 +54,7 @@ class Price extends AbstractModifier
         $productId = $this->locator->getProduct()->getId();
 
         if (!$product->getSpecialPrice()) {
-
+            die();
             return $this->resolvePersistentData($data);
         }
 
