@@ -48,14 +48,14 @@ class Price extends AbstractModifier
 
     public function modifyData( array $data )
     {
+        return $product->getSpecialPrice();
         if (!$this->locator->getProduct()->getId() && $this->dataPersistor->get('catalog_product')) {
             return $this->resolvePersistentData($data);
         }
         $productId = $this->locator->getProduct()->getId();
 
         if (!$product->getSpecialPrice()) {
-            die();
-            return $this->resolvePersistentData($data);
+            return;
         }
 
         $productPrice =  $this->locator->getProduct()->getPrice();
