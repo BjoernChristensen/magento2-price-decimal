@@ -44,8 +44,10 @@ class PriceCurrency extends PriceFormatPluginAbstract
             if (
                 strpos((string)$price, ',00') ||
                 strpos((string)$price, ',95') ||
+                strpos((string)$price, ',25') ||
                 strpos((string)$price, '.00') ||
-                strpos((string)$price, '.95')
+                strpos((string)$price, '.95') ||
+                strpos((string)$price, '.25')
             ) {
                 return (float)$price;
             }
@@ -64,7 +66,7 @@ class PriceCurrency extends PriceFormatPluginAbstract
      */
     public function beforeConvertAndFormat(
         \Magento\Directory\Model\PriceCurrency $subject,
-        ...$args
+        ...$argst
     ) {
         if ($this->getConfig()->isEnable()) {
             // add the optional args
