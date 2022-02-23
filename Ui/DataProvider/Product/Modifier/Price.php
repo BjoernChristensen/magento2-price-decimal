@@ -48,28 +48,30 @@ class Price extends AbstractModifier
 
     public function modifyData( array $data )
     {
-        if (!$this->locator->getProduct()->getId() && $this->dataPersistor->get('catalog_product')) {
-            return $this->resolvePersistentData($data);
-        }
-        $productId = $this->locator->getProduct()->getId();
-        // $productPrice =  $this->locator->getProduct()->getPrice();
-        // $data[$productId][self::DATA_SOURCE_DEFAULT]['price'] = number_format((float)$productPrice, 2, '.', '');
+        $objectmanager = \Magento\Framework\App\ObjectManager::getInstance();
+        $state =  $objectmanager->get('Magento\Framework\App\State');
 
-        if(isset($data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'])){
-            // if (count($data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price']) > 0) {
+        if($state->getAreaCode() == 'frontend') {
+            if (!$this->locator->getProduct()->getId() && $this->dataPersistor->get('catalog_product')) {
+                return $this->resolvePersistentData($data);
+            }
+            $productId = $this->locator->getProduct()->getId();
+            // $productPrice =  $this->locator->getProduct()->getPrice();
+            // $data[$productId][self::DATA_SOURCE_DEFAULT]['price'] = number_format((float)$productPrice, 2, '.', '');
+
+            if(isset($data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'])){
                 foreach($data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'] as $key => $tierPrice){
                     $data[$productId][self::DATA_SOURCE_DEFAULT]['tier_price'][$key]['price'] = number_format((float)$tierPrice['website_price'], 2, '.', '');
                 }
-            // }
-        }
+            }
 
-        if(isset($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'])){
-            // if (count($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price']) > 0) {
+            if(isset($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'])){
                 foreach($data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'] as $key => $tierPrice){
                     $data[$productId][self::DATA_SOURCE_DEFAULT]['special_price'][$key]['price'] = number_format((float)$tierPrice['website_price'], 2, '.', '');
                 }
-            // }
+            }
         }
+
         return $data;
     }
 
